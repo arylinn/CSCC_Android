@@ -8,7 +8,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Task todoList = new Task();
+        TaskList todoList = new TaskList();
         todoList.start("Pick an Option");
     }
 
