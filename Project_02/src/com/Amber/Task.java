@@ -59,6 +59,8 @@ public class Task {
         int x = Integer.parseInt(choice);
         priority.add(x);
 
+        System.out.println("Task has been added");
+
     }
 
     public void update() {
@@ -67,22 +69,30 @@ public class Task {
         String pick = scanner.nextLine();
         int i = Integer.parseInt(pick);
 
-        System.out.println("Enter the description of task");
+        System.out.println("Enter the name of the new task");
         String NewTask = scanner.nextLine();
+        System.out.println("Enter the description of the new task");
+        String NewDescription = scanner.nextLine();
+        System.out.println("Enter the priority of the new task, 0 - 5 (0 being lowest, 5 being highest)");
+        String NewPriority = scanner.nextLine();
+        int j = Integer.parseInt(NewPriority);
 
         tasks.set(i, NewTask);
+        description.set(i, NewDescription);
+        priority.set(i, j);
 
-        System.out.println("Task has been updated");
+        System.out.println("Task has been updates");
     }
 
     public void delete() {
+        showList();
         System.out.println("Enter the index of task to be deleted");
         String choice = scanner.nextLine();
         int j = Integer.parseInt(choice);
 
         tasks.remove(j);
 
-        System.out.println("Task has been removed");
+        System.out.println("Task has been deleted");
     }
 
     public void showList() {
@@ -96,30 +106,15 @@ public class Task {
     {
         System.out.println("Enter A Priority To View The Tasks");
         String option = scanner.nextLine();
-        int y = Integer.parseInt(option);
+        int x = Integer.parseInt(option);
 
-        switch (option) {
-            case ("0"):
-
-                break;
-            case "1":
-
-                break;
-            case "2":
-
-                break;
-            case "3":
-
-                break;
-            case "4":
-
-                break;
-            case"5":
-
-                break;
-            default:
-                System.out.println("Sorry invalid option.");
-
+        for (int i = 0; i < tasks.size(); i++)
+        {
+            if(x == 0)
+            {
+                System.out.println("(" + i + ") Task Name, Description, Priority: " + tasks.get(i)
+                        + " ,  " + description.get(i) + " , " + priority.get(i) + ".");
+            }
         }
 
     }
