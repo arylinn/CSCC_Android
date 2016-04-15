@@ -10,6 +10,11 @@ public class Main {
     public static void main(String[] args) {
         TaskList todoList = new TaskList();
         todoList.start("Pick an Option");
+
+        for(TaskList.Task task: todoList)
+        {
+            System.out.println(task);
+        }
     }
 
 }

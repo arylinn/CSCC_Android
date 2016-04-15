@@ -3,11 +3,12 @@ package com.Amber;
 import java.lang.IndexOutOfBoundsException;
 import java.lang.System;
 import java.util.*;
+import java.util.function.Consumer;
 
 /**
  * Created by Amber on 3/11/2016.
  */
-public class TaskList {
+public class TaskList implements Iterable<TaskList.Task> {
     private Scanner scanner = new Scanner(System.in);
 
     private List<Task> tasks = new ArrayList<Task>();
@@ -22,6 +23,7 @@ public class TaskList {
             System.out.println("(3)Update A Task");
             System.out.println("(4)List All Tasks");
             System.out.println("(5)List All Tasks of a Certain Priority");
+            System.out.println("(6)Sort By Priority");
             System.out.println("(0)Exit");
             choice = scanner.nextLine();
             switch (choice) {
@@ -39,12 +41,21 @@ public class TaskList {
                     break;
                 case "5":
                     listByPriority();
+                    break;
+                case "6":
+                    sortPriority();
                 case "0":
                     break;
                 default:
                     System.out.println(choice + " is not an option. ");
             }
         }
+    }
+
+    public void sortPriority()
+    {
+        Collections.sort(tasks);
+        tasks.forEach(Task -> printTask(Task));
     }
 
     public void addTask() {
@@ -140,10 +151,26 @@ public class TaskList {
         System.out.println(
                 "Name: " + task.getName() +
                         "\tDescription: " + task.getDescription() +
-                        "\tPriority" + task.getPriority());
+                        "\tPriority: " + task.getPriority());
     }
 
-    private class Task {
+    @Override
+    public Iterator<Task> iterator() {
+        return tasks.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super Task> action) {
+
+    }
+
+    @Override
+    public Spliterator<Task> spliterator() {
+        return null;
+    }
+
+
+    public class Task implements Comparable<Task>{
 
         private String name;
 
@@ -179,6 +206,23 @@ public class TaskList {
 
         public void setPriority(Integer priority) {
             this.priority = priority;
+        }
+
+        @Override
+        public int compareTo(Task test) {
+            int compareTest = ((Task) test).getPriority();
+
+            if(this.getPriority() > test.getPriority())
+            {
+                return 1;
+            }
+            else if (this.getPriority() < test.getPriority())
+            {
+                return -1;
+            }
+            else
+            return this.name.compareTo(getName());
+
         }
     }
 
